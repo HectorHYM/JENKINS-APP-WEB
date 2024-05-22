@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos random de gatitos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h4>Gif del gato del día de hoy</h4>
+        <img src="{{url}}" alt="Gif del gato del día">
+        <p><small>Refresque la página para un nuevo gato del día</small></p>
+    </div>
+</body>
+</html>
