@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 //Se clona el repositorio de Git
-                git 'https://github.com/HectorHYM/JENKINS-APP-WEB.git'
+                git branch: 'main', url: 'https://github.com/HectorHYM/JENKINS-APP-WEB.git'
             }
         }
         stage('Build Docker Image') {
