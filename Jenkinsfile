@@ -26,7 +26,7 @@ pipeline {
                 script {
                     //Se detiene y elimina el contenedor si ya existe
                     sh 'docker stop ${DOCKER_CONTAINER_NAME} || true'
-                    sh 'dcoker rm ${DOCKER_CONTAINER_NAME} || true'
+                    sh 'docker rm ${DOCKER_CONTAINER_NAME} || true'
 
                     //Se ejecuta el nuevo contenedor
                     sh 'docker run -d -p 5000:5000 --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE}'
