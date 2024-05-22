@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "jenkins-cat:alpine"
+        DOCKER_IMAGE = "jenkins-cat:latest"
         DOCKER_CONTAINER_NAME = "jenkins-cat"
     }
 
