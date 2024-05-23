@@ -9,26 +9,31 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                //Se clona el repositorio de Git
-                git branch: 'main', url: 'https://github.com/HectorHYM/JENKINS-APP-WEB.git'
+                script {
+                    // Eliminar la carpeta si ya existe
+                    sh 'rm -rf JENKINS-APP-WEB'
+                    // Clonar el repositorio manualmente
+                    sh 'git clone https://github.com/HectorHYM/JENKINS-APP-WEB.git'
+                    sh 'cd JENKINS-APP-WEB && git checkout main'
+                }
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    //Se contruye la imagen Docker
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                    // Construir la imagen Docker
+                    sh 'cd JENKINS-APP-WEB && docker build -t ${DOCKER_IMAGE} .'
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
-                    //Se detiene y elimina el contenedor si ya existe
+                    // Detener y eliminar el contenedor si ya existe
                     sh 'docker stop ${DOCKER_CONTAINER_NAME} || true'
                     sh 'docker rm ${DOCKER_CONTAINER_NAME} || true'
 
-                    //Se ejecuta el nuevo contenedor
+                    // Ejecutar el nuevo contenedor
                     sh 'docker run -d -p 5000:5000 --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE}'
                 }
             }
@@ -39,7 +44,7 @@ pipeline {
         success {
             echo 'La aplicación Flask se ha desplegado correctamente'
         }
-        failure{
+        failure {
             echo 'La construcción o el despliegue han fallado'
         }
     }
